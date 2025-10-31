@@ -4,3 +4,14 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     public: false
+
+  Tourze\TencentMeetingBundle\Controller\:
+    resource: '../../Controller/'
+    public: true
+  Tourze\TencentMeetingBundle\Factory\:
+    resource: '../../Factory/'
+  Tourze\TencentMeetingBundle\Repository\:
+    resource: '../../Repository/'
+  Tourze\TencentMeetingBundle\Service\:
+    resource: '../../Service/'
+    public: true
