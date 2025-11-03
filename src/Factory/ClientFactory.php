@@ -2,6 +2,7 @@
 
 namespace Tourze\TencentMeetingBundle\Factory;
 
+use Monolog\Attribute\WithMonologChannel;
 use Psr\Log\LoggerInterface;
 use Tourze\TencentMeetingBundle\Exception\ConfigurationException;
 use Tourze\TencentMeetingBundle\Service\ConfigService;
@@ -9,7 +10,6 @@ use Tourze\TencentMeetingBundle\Service\HttpClientService;
 use Tourze\TencentMeetingBundle\Service\MeetingClient;
 use Tourze\TencentMeetingBundle\Service\RecordingClient;
 use Tourze\TencentMeetingBundle\Service\RoomClient;
-use Tourze\TencentMeetingBundle\Service\SignatureService;
 use Tourze\TencentMeetingBundle\Service\SyncConfigurationValidator;
 use Tourze\TencentMeetingBundle\Service\SyncService;
 use Tourze\TencentMeetingBundle\Service\SyncStatisticsCalculator;
@@ -55,6 +55,7 @@ class ClientFactory implements ClientFactoryInterface
     public function __construct(
         private ConfigService $configService,
         private HttpClientService $httpClientService,
+        #[WithMonologChannel(channel: 'tencent_meeting')]
         private LoggerInterface $loggerService,
     ) {
         $this->configuration = $this->getDefaultConfiguration();

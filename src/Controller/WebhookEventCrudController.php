@@ -171,13 +171,13 @@ final class WebhookEventCrudController extends AbstractCrudController
 
         if (Crud::PAGE_DETAIL === $pageName) {
             yield TextareaField::new('payload', '原始载荷')
-                ->setTemplateName('admin/field/code_preview.html.twig')
+                ->setTemplateName('crud/field/textarea')
                 ->setHelp('Webhook的原始JSON载荷')
                 ->addCssClass('font-monospace')
             ;
 
             yield TextareaField::new('processResult', '处理结果')
-                ->setTemplateName('admin/field/code_preview.html.twig')
+                ->setTemplateName('crud/field/textarea')
                 ->setHelp('事件处理的详细结果')
                 ->addCssClass('font-monospace')
             ;
@@ -328,11 +328,20 @@ final class WebhookEventCrudController extends AbstractCrudController
             return $this->redirectToRoute('admin');
         }
 
-        // 返回格式化的JSON视图
-        return $this->render('admin/webhook/payload_view.html.twig', [
-            'event' => $entity,
+        // 返回JSON响应
+        $data = [
+            'event' => [
+                'id' => $entity->getId(),
+                'eventId' => $entity->getEventId(),
+                'eventType' => $entity->getEventType(),
+                'processStatus' => $entity->getProcessStatus(),
+            ],
             'payload' => json_decode($entity->getPayload(), true),
             'processResult' => null !== $entity->getProcessResult() ? json_decode($entity->getProcessResult(), true) : null,
+        ];
+
+        return new Response(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), 200, [
+            'Content-Type' => 'application/json; charset=utf-8',
         ]);
     }
 

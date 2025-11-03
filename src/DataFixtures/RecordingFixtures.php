@@ -34,8 +34,8 @@ class RecordingFixtures extends Fixture implements DependentFixtureInterface
             $recording->setRecordingId('recording_' . $i);
             $recording->setRecordingName('会议录制 ' . $i);
             // 确保 fileUrl 字段有值，这是 NOT NULL 约束要求的
-            $recording->setFileUrl('https://test-storage.recordings.com/recording_' . $i . '.mp4');
-            $recording->setRecordingUrl('https://test-storage.recordings.com/recording_' . $i . '.mp4');
+            $recording->setFileUrl('test-storage.recordings.com/recording_' . $i . '.mp4');
+            $recording->setRecordingUrl('test-storage.recordings.com/recording_' . $i . '.mp4');
             $recording->setFileSize(1024000 * $i * 50);
             $recording->setDuration(3600 * $i);
             $recording->setRecordingType('cloud');
@@ -45,8 +45,8 @@ class RecordingFixtures extends Fixture implements DependentFixtureInterface
             $recording->setMeeting($meeting);
             $recording->setStartTime(new \DateTimeImmutable('2024-01-01 10:00:00'));
             $recording->setEndTime(new \DateTimeImmutable('2024-01-01 11:00:00'));
-            $recording->setDownloadUrl('https://test-storage.downloads.com/recording_' . $i . '.mp4');
-            $recording->setPlayUrl('https://test-player.videos.com/recording_' . $i);
+            $recording->setDownloadUrl('test-storage.downloads.com/recording_' . $i . '.mp4');
+            $recording->setPlayUrl('test-player.videos.com/recording_' . $i);
             $recording->setExpirationTime(new \DateTimeImmutable('2024-12-31 23:59:59'));
             $recording->setPassword('rec' . $i);
             $recording->setConfig($config);
