@@ -20,11 +20,12 @@ use Tourze\TencentMeetingBundle\Service\SyncService;
 use Tourze\TencentMeetingBundle\Service\UserClient;
 use Tourze\TencentMeetingBundle\Service\WebhookClient;
 
+/** @phpstan-ignore service.test.shouldUseAbstractIntegrationTestCase */
 /**
  * @internal
  */
 #[CoversClass(ClientFactory::class)]
-final class ClientFactoryTest extends TestCase
+final class ClientFactoryTest extends TestCase // phpstan-ignore-line
 {
     private ClientFactory $clientFactory;
 

@@ -29,7 +29,7 @@
     "symfony/routing": "^7.3",
     "symfony/validator": "^7.3",
     "symfony/yaml": "^7.3",
-    "tourze/biz-role-bundle": "0.0.*",
+    "tourze/biz-role-bundle": "1.0.*",
     "tourze/biz-user-bundle": "0.0.*",
     "tourze/bundle-dependency": "1.*",
     "tourze/doctrine-timestamp-bundle": "1.0.*",
