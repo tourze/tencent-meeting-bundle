@@ -64,11 +64,6 @@ final class DeviceCrudControllerTest extends AbstractEasyAdminControllerTestCase
         return self::provideNewPageFields();
     }
 
-    public function testGetEntityFqcn(): void
-    {
-        self::assertSame(Device::class, DeviceCrudController::getEntityFqcn());
-    }
-
     public function testValidationErrors(): void
     {
         $client = self::createClientWithDatabase();

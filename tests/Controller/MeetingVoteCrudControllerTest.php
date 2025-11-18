@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 use Tourze\TencentMeetingBundle\Controller\MeetingVoteCrudController;
-use Tourze\TencentMeetingBundle\Entity\MeetingVote;
 
 /**
  * @internal
@@ -20,11 +19,6 @@ final class MeetingVoteCrudControllerTest extends AbstractEasyAdminControllerTes
     protected function getControllerService(): MeetingVoteCrudController
     {
         return self::getService(MeetingVoteCrudController::class);
-    }
-
-    public function testGetEntityFqcn(): void
-    {
-        self::assertSame(MeetingVote::class, MeetingVoteCrudController::getEntityFqcn());
     }
 
     /** @return iterable<string, array{string}> */

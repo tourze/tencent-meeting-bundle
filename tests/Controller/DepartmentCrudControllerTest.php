@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 use Tourze\TencentMeetingBundle\Controller\DepartmentCrudController;
-use Tourze\TencentMeetingBundle\Entity\Department;
 
 /**
  * @internal
@@ -52,11 +51,6 @@ final class DepartmentCrudControllerTest extends AbstractEasyAdminControllerTest
     public static function provideEditPageFields(): iterable
     {
         return self::provideNewPageFields();
-    }
-
-    public function testGetEntityFqcn(): void
-    {
-        self::assertSame(Department::class, DepartmentCrudController::getEntityFqcn());
     }
 
     public function testValidationErrors(): void

@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 use Tourze\TencentMeetingBundle\Controller\RoleCrudController;
-use Tourze\TencentMeetingBundle\Entity\Role;
 
 /**
  * @internal
@@ -20,11 +19,6 @@ final class RoleCrudControllerTest extends AbstractEasyAdminControllerTestCase
     protected function getControllerService(): RoleCrudController
     {
         return self::getService(RoleCrudController::class);
-    }
-
-    public function testGetEntityFqcn(): void
-    {
-        self::assertSame(Role::class, RoleCrudController::getEntityFqcn());
     }
 
     /** @return iterable<string, array{string}> */

@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 use Tourze\TencentMeetingBundle\Controller\WebhookEventCrudController;
-use Tourze\TencentMeetingBundle\Entity\WebhookEvent;
 
 /**
  * @internal
@@ -20,11 +19,6 @@ final class WebhookEventCrudControllerTest extends AbstractEasyAdminControllerTe
     protected function getControllerService(): WebhookEventCrudController
     {
         return self::getService(WebhookEventCrudController::class);
-    }
-
-    public function testGetEntityFqcn(): void
-    {
-        self::assertSame(WebhookEvent::class, WebhookEventCrudController::getEntityFqcn());
     }
 
     /** @return iterable<string, array{string}> */

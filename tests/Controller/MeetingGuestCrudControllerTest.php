@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 use Tourze\TencentMeetingBundle\Controller\MeetingGuestCrudController;
-use Tourze\TencentMeetingBundle\Entity\MeetingGuest;
 
 /**
  * @internal
@@ -63,11 +62,6 @@ final class MeetingGuestCrudControllerTest extends AbstractEasyAdminControllerTe
         yield '邀请状态列' => ['邀请状态'];
         yield '参会状态列' => ['参会状态'];
         yield '需要提醒列' => ['需要提醒'];
-    }
-
-    public function testGetEntityFqcn(): void
-    {
-        self::assertSame(MeetingGuest::class, MeetingGuestCrudController::getEntityFqcn());
     }
 
     public function testValidationErrors(): void

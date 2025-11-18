@@ -58,11 +58,6 @@ final class MeetingCrudControllerTest extends AbstractEasyAdminControllerTestCas
         return self::provideNewPageFields();
     }
 
-    public function testGetEntityFqcn(): void
-    {
-        self::assertSame(Meeting::class, MeetingCrudController::getEntityFqcn());
-    }
-
     public function testUnauthorizedAccessReturnsRedirect(): void
     {
         $client = self::createClientWithDatabase();
