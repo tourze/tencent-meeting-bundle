@@ -8,6 +8,7 @@ use Firebase\JWT\BeforeValidException;
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Monolog\Attribute\WithMonologChannel;
 use Psr\Log\LoggerInterface;
 use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
 
@@ -16,6 +17,7 @@ use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
  *
  * 实现JWT认证机制，支持企业自建应用的认证方式
  */
+#[WithMonologChannel(channel: 'tencent_meeting')]
 class JwtAuthService implements AuthServiceInterface
 {
     private string $secretKey;
@@ -33,7 +35,7 @@ class JwtAuthService implements AuthServiceInterface
 
     public function __construct(
         private LoggerInterface $loggerService,
-        private ?ConfigServiceInterface $configService = null,
+        private readonly ?ConfigServiceInterface $configService = null,
     ) {
         $this->secretKey = $configService?->getSecretKey() ?? 'default_secret_key';
         $this->issuer = 'tencent-meeting-bundle';

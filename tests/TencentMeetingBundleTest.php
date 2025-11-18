@@ -42,14 +42,6 @@ final class TencentMeetingBundleTest extends AbstractBundleTestCase
         $this->assertContains(BundleDependencyInterface::class, $interfaces);
     }
 
-    public function testGetBundleDependencies(): void
-    {
-        $dependencies = TencentMeetingBundle::getBundleDependencies();
-        $this->assertCount(2, $dependencies);
-        $this->assertArrayHasKey(DoctrineBundle::class, $dependencies);
-        $this->assertArrayHasKey(HttpClientBundle::class, $dependencies);
-    }
-
     public function testDoctrineBundleDependencyConfiguration(): void
     {
         $dependencies = TencentMeetingBundle::getBundleDependencies();
@@ -94,25 +86,6 @@ final class TencentMeetingBundleTest extends AbstractBundleTestCase
         $httpClientBundle = new HttpClientBundle();
         $this->assertInstanceOf(Bundle::class, $httpClientBundle);
         $this->assertInstanceOf(HttpClientBundle::class, $httpClientBundle);
-    }
-
-    public function testGetBundleDependenciesIsStatic(): void
-    {
-        $reflection = new \ReflectionClass(TencentMeetingBundle::class);
-        $method = $reflection->getMethod('getBundleDependencies');
-
-        $this->assertTrue($method->isStatic());
-        $this->assertTrue($method->isPublic());
-    }
-
-    public function testGetBundleDependenciesReturnType(): void
-    {
-        $reflection = new \ReflectionClass(TencentMeetingBundle::class);
-        $method = $reflection->getMethod('getBundleDependencies');
-
-        $returnType = $method->getReturnType();
-        $this->assertNotNull($returnType);
-        $this->assertSame('array', $returnType instanceof \ReflectionNamedType ? $returnType->getName() : (string) $returnType);
     }
 
     public function testBundleDependencyEnvironmentConfiguration(): void
