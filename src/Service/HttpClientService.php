@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Tourze\TencentMeetingBundle\Service;
 
+use Monolog\Attribute\WithMonologChannel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpClient\Retry\GenericRetryStrategy;
 use Symfony\Component\HttpClient\RetryableHttpClient;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface as ContractsHttpClientInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
+#[WithMonologChannel(channel: 'tencent_meeting')]
 class HttpClientService
 {
-    private ContractsHttpClientInterface $client;
+    private HttpClientInterface $client;
 
     public function __construct(
         private ConfigServiceInterface $config,
         private LoggerInterface $logger,
-        ?ContractsHttpClientInterface $httpClient = null,
+        ?HttpClientInterface $httpClient = null,
     ) {
         $this->client = $httpClient ?? $this->createHttpClient();
     }
@@ -28,7 +29,7 @@ class HttpClientService
     /**
      * 创建HTTP客户端
      */
-    private function createHttpClient(): ContractsHttpClientInterface
+    private function createHttpClient(): HttpClientInterface
     {
         $baseClient = HttpClient::create([
             'base_uri' => $this->config->getApiUrl(),
