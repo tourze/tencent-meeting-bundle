@@ -2,6 +2,7 @@
 
 namespace Tourze\TencentMeetingBundle\Service;
 
+use Monolog\Attribute\WithMonologChannel;
 use Tourze\TencentMeetingBundle\Exception\ApiException;
 use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
 
@@ -10,7 +11,8 @@ use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
  *
  * 提供会议管理的完整API封装，包括创建、查询、更新、删除等操作
  */
-class MeetingClient extends BaseClient
+#[WithMonologChannel(channel: 'tencent_meeting')]
+final class MeetingClient extends BaseClient
 {
     /**
      * 创建会议

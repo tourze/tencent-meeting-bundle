@@ -33,7 +33,7 @@ use Tourze\TencentMeetingBundle\Controller\WebhookEventCrudController;
 
 // Temporarily disabled to avoid route conflicts with EasyAdmin auto-discovery
 // #[AutoconfigureTag(name: 'routing.loader')]
-class AttributeControllerLoader extends Loader implements RoutingAutoLoaderInterface
+final class AttributeControllerLoader extends Loader implements RoutingAutoLoaderInterface
 {
     private AttributeRouteControllerLoader $controllerLoader;
 

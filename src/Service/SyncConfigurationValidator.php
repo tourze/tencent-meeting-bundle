@@ -11,7 +11,7 @@ use Tourze\TencentMeetingBundle\Exception\ApiException;
  *
  * 负责验证同步配置的有效性
  */
-class SyncConfigurationValidator
+final class SyncConfigurationValidator
 {
     /** @var array<string> */
     private const VALID_CONFIG_KEYS = [

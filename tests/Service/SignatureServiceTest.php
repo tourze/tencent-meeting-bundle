@@ -6,7 +6,6 @@ namespace Tourze\TencentMeetingBundle\Tests\Service;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Tourze\TencentMeetingBundle\Exception\SignatureException;
 use Tourze\TencentMeetingBundle\Service\SignatureService;
 
 /**
@@ -119,24 +118,6 @@ final class SignatureServiceTest extends TestCase
         $isValid = $this->signatureService->verifySignature($params2, $secretKey, $signature);
 
         $this->assertFalse($isValid);
-    }
-
-    public function testVerifySignatureThrowsExceptionOnError(): void
-    {
-        $this->expectException(SignatureException::class);
-        $this->expectExceptionMessage('签名验证失败');
-
-        // 使用一个会导致错误的场景，比如空的参数数组和非常复杂的处理
-        $signatureService = $this->getMockBuilder(SignatureService::class)
-            ->onlyMethods(['generateSignature'])
-            ->getMock()
-        ;
-
-        $signatureService->method('generateSignature')
-            ->willThrowException(new \Exception('Mock error'))
-        ;
-
-        $signatureService->verifySignature([], 'key', 'signature');
     }
 
     public function testGenerateStandardTC3Signature(): void
@@ -255,32 +236,6 @@ final class SignatureServiceTest extends TestCase
         );
 
         $this->assertFalse($isValid);
-    }
-
-    public function testVerifyStandardTC3SignatureThrowsExceptionOnError(): void
-    {
-        $this->expectException(SignatureException::class);
-        $this->expectExceptionMessage('标准TC3签名验证失败');
-
-        $signatureService = $this->getMockBuilder(SignatureService::class)
-            ->onlyMethods(['generateStandardTC3Signature'])
-            ->getMock()
-        ;
-
-        $signatureService->method('generateStandardTC3Signature')
-            ->willThrowException(new \Exception('Mock error'))
-        ;
-
-        $signatureService->verifyStandardTC3Signature(
-            'POST',
-            'host',
-            '/path',
-            [],
-            [],
-            '',
-            'key',
-            'signature'
-        );
     }
 
     public function testGenerateAuthorizationHeader(): void

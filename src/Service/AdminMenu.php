@@ -34,7 +34,7 @@ use Tourze\TencentMeetingBundle\Entity\WebhookEvent;
  * 腾讯会议管理后台菜单提供者
  */
 #[Autoconfigure(public: true)]
-readonly class AdminMenu implements MenuProviderInterface
+final readonly class AdminMenu implements MenuProviderInterface
 {
     public function __construct(
         private LinkGeneratorInterface $linkGenerator,

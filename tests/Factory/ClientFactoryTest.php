@@ -5,14 +5,10 @@ declare(strict_types=1);
 namespace Tourze\TencentMeetingBundle\Tests\Factory;
 
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
-use Tourze\TencentMeetingBundle\Exception\ConfigurationException;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Tourze\PHPUnitSymfonyKernelTest\AbstractIntegrationTestCase;
 use Tourze\TencentMeetingBundle\Factory\ClientFactory;
 use Tourze\TencentMeetingBundle\Factory\ClientFactoryInterface;
-use Tourze\TencentMeetingBundle\Service\ConfigService;
-use Tourze\TencentMeetingBundle\Service\ConfigServiceInterface;
-use Tourze\TencentMeetingBundle\Service\HttpClientService;
 use Tourze\TencentMeetingBundle\Service\MeetingClient;
 use Tourze\TencentMeetingBundle\Service\RecordingClient;
 use Tourze\TencentMeetingBundle\Service\RoomClient;
@@ -20,31 +16,28 @@ use Tourze\TencentMeetingBundle\Service\SyncService;
 use Tourze\TencentMeetingBundle\Service\UserClient;
 use Tourze\TencentMeetingBundle\Service\WebhookClient;
 
-/** @phpstan-ignore service.test.shouldUseAbstractIntegrationTestCase */
 /**
  * @internal
  */
 #[CoversClass(ClientFactory::class)]
-final class ClientFactoryTest extends TestCase // phpstan-ignore-line
+#[RunTestsInSeparateProcesses]
+final class ClientFactoryTest extends AbstractIntegrationTestCase
 {
     private ClientFactory $clientFactory;
 
-    protected function setUp(): void
+    protected function onSetUp(): void
     {
-        $this->clientFactory = $this->createClientFactory();
+        $this->clientFactory = self::getService(ClientFactory::class);
     }
 
     public function testClientFactoryCanBeCreatedFromContainer(): void
     {
-        $clientFactory = $this->createClientFactory();
-        $this->assertInstanceOf(ClientFactory::class, $clientFactory);
-        $this->assertInstanceOf(ClientFactoryInterface::class, $clientFactory);
+        $this->assertInstanceOf(ClientFactory::class, $this->clientFactory);
+        $this->assertInstanceOf(ClientFactoryInterface::class, $this->clientFactory);
     }
 
     public function testClientFactoryHasRequiredMethods(): void
     {
-        $clientFactory = $this->createClientFactory();
-
         $requiredMethods = [
             'createMeetingClient',
             'createUserClient',
@@ -62,7 +55,7 @@ final class ClientFactoryTest extends TestCase // phpstan-ignore-line
             'reset',
         ];
 
-        $classMethods = get_class_methods($clientFactory);
+        $classMethods = get_class_methods($this->clientFactory);
 
         foreach ($requiredMethods as $method) {
             $this->assertContains($method, $classMethods, "Method {$method} not found in ClientFactory");
@@ -311,14 +304,5 @@ final class ClientFactoryTest extends TestCase // phpstan-ignore-line
         $this->assertIsArray($updatedStatsData);
         $this->assertArrayHasKey('resets', $updatedStatsData);
         $this->assertGreaterThan($initialResets, $updatedStatsData['resets']);
-    }
-
-    private function createClientFactory(): ClientFactory
-    {
-        $configService = $this->createMock(ConfigService::class);
-        $httpClientService = $this->createMock(HttpClientService::class);
-        $mockLogger = $this->createMock(LoggerInterface::class);
-
-        return new ClientFactory($configService, $httpClientService, $mockLogger);
     }
 }

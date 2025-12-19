@@ -11,7 +11,7 @@ use Tourze\TencentMeetingBundle\Exception\SignatureException;
  *
  * 实现TC3-HMAC-SHA256签名算法，为腾讯会议API调用提供认证支持
  */
-class SignatureService
+final class SignatureService
 {
     /**
      * 生成签名

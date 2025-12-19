@@ -10,7 +10,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
-class CacheService
+final class CacheService
 {
     private TagAwareAdapter $cache;
 

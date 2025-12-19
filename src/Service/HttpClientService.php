@@ -14,7 +14,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 #[WithMonologChannel(channel: 'tencent_meeting')]
-class HttpClientService
+final class HttpClientService
 {
     private HttpClientInterface $client;
 

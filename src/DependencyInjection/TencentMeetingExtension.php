@@ -4,7 +4,7 @@ namespace Tourze\TencentMeetingBundle\DependencyInjection;
 
 use Tourze\SymfonyDependencyServiceLoader\AutoExtension;
 
-class TencentMeetingExtension extends AutoExtension
+final class TencentMeetingExtension extends AutoExtension
 {
     protected function getConfigDir(): string
     {

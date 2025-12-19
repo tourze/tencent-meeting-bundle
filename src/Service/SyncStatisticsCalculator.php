@@ -9,7 +9,7 @@ namespace Tourze\TencentMeetingBundle\Service;
  *
  * 负责计算同步相关的统计数据
  */
-class SyncStatisticsCalculator
+final class SyncStatisticsCalculator
 {
     /**
      * 计算平均同步时间

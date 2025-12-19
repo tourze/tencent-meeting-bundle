@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tourze\TencentMeetingBundle\Service;
 
+use Monolog\Attribute\WithMonologChannel;
 use Psr\Log\LoggerInterface;
 use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
 use Tourze\TencentMeetingBundle\Exception\SignatureException;
@@ -13,7 +14,8 @@ use Tourze\TencentMeetingBundle\Exception\SignatureException;
  *
  * 实现OAuth2.0认证机制，支持第三方应用的认证方式
  */
-class OAuth2AuthService implements AuthServiceInterface
+#[WithMonologChannel(channel: 'tencent_meeting')]
+final class OAuth2AuthService implements AuthServiceInterface
 {
     private string $clientId;
 

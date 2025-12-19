@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tourze\TencentMeetingBundle\Service;
 
-class ConfigService implements ConfigServiceInterface
+final class ConfigService implements ConfigServiceInterface
 {
     /**
      * 获取字符串类型的环境变量

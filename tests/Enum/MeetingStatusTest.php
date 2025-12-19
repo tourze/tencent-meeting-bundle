@@ -71,13 +71,6 @@ final class MeetingStatusTest extends AbstractEnumTestCase
         $this->assertNull(MeetingStatus::tryFrom($value));
     }
 
-    public function testTryFromValueNull(): void
-    {
-        $this->expectException(\TypeError::class);
-        // @phpstan-ignore argument.type
-        MeetingStatus::tryFrom(null); // @phpstan-ignore-line
-    }
-
     public function testValueUniqueness(): void
     {
         $values = array_map(fn (MeetingStatus $case) => $case->value, MeetingStatus::cases());

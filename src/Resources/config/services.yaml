@@ -10,6 +10,7 @@ services:
     public: true
   Tourze\TencentMeetingBundle\Factory\:
     resource: '../../Factory/'
+    public: true
   Tourze\TencentMeetingBundle\Repository\:
     resource: '../../Repository/'
   Tourze\TencentMeetingBundle\Service\:

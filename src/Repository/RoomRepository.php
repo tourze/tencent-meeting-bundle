@@ -17,7 +17,7 @@ use Tourze\TencentMeetingBundle\Entity\Room;
  * @extends ServiceEntityRepository<Room>
  */
 #[AsRepository(entityClass: Room::class)]
-class RoomRepository extends ServiceEntityRepository
+final class RoomRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

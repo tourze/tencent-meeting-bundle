@@ -2,6 +2,7 @@
 
 namespace Tourze\TencentMeetingBundle\Service;
 
+use Monolog\Attribute\WithMonologChannel;
 use Tourze\TencentMeetingBundle\Exception\ApiException;
 use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
 
@@ -10,7 +11,8 @@ use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
  *
  * 提供录制管理的完整API封装，包括查询、控制、下载等操作
  */
-class RecordingClient extends BaseClient
+#[WithMonologChannel(channel: 'tencent_meeting')]
+final class RecordingClient extends BaseClient
 {
     /**
      * 获取录制信息

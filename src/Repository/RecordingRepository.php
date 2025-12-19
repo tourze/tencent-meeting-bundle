@@ -17,7 +17,7 @@ use Tourze\TencentMeetingBundle\Entity\Recording;
  * @extends ServiceEntityRepository<Recording>
  */
 #[AsRepository(entityClass: Recording::class)]
-class RecordingRepository extends ServiceEntityRepository
+final class RecordingRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

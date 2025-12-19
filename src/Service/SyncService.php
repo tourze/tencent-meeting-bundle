@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tourze\TencentMeetingBundle\Service;
 
+use Monolog\Attribute\WithMonologChannel;
 use Psr\Log\LoggerInterface;
 use Tourze\TencentMeetingBundle\Exception\ApiException;
 use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
@@ -13,7 +14,8 @@ use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
  *
  * 提供数据同步的完整功能，包括会议、用户、会议室、录制等数据的同步
  */
-class SyncService implements SyncServiceInterface
+#[WithMonologChannel(channel: 'tencent_meeting')]
+final class SyncService implements SyncServiceInterface
 {
     private string $syncStatus;
 

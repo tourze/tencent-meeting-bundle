@@ -17,7 +17,7 @@ use Tourze\TencentMeetingBundle\Entity\TencentMeetingConfig;
  * @extends ServiceEntityRepository<TencentMeetingConfig>
  */
 #[AsRepository(entityClass: TencentMeetingConfig::class)]
-class TencentMeetingConfigRepository extends ServiceEntityRepository
+final class TencentMeetingConfigRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

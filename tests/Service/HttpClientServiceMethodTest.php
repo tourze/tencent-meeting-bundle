@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Tourze\TencentMeetingBundle\Tests\Service;
 
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
-use Tourze\TencentMeetingBundle\Service\ConfigServiceInterface;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Tourze\PHPUnitSymfonyKernelTest\AbstractIntegrationTestCase;
 use Tourze\TencentMeetingBundle\Service\HttpClientService;
 
 /**
@@ -16,111 +15,20 @@ use Tourze\TencentMeetingBundle\Service\HttpClientService;
  * @internal
  */
 #[CoversClass(HttpClientService::class)]
-final class HttpClientServiceMethodTest extends TestCase
+#[RunTestsInSeparateProcesses]
+final class HttpClientServiceMethodTest extends AbstractIntegrationTestCase
 {
-    private ConfigServiceInterface $configService;
+    private HttpClientService $service;
 
-    private LoggerInterface $loggerService;
-
-    protected function setUp(): void
+    protected function onSetUp(): void
     {
-        // 使用匿名类替代 Mock
-        $this->configService = new class implements ConfigServiceInterface {
-            public function getApiUrl(): string
-            {
-                return 'https://api.meeting.qq.com';
-            }
-
-            public function getTimeout(): int
-            {
-                return 30;
-            }
-
-            public function getRetryTimes(): int
-            {
-                return 0;
-            }
-
-            public function getAuthToken(): ?string
-            {
-                return null;
-            }
-
-            public function getLogLevel(): string
-            {
-                return 'info';
-            }
-
-            public function isDebugEnabled(): bool
-            {
-                return false;
-            }
-
-            public function getCacheTtl(): int
-            {
-                return 3600;
-            }
-
-            public function getWebhookSecret(): ?string
-            {
-                return null;
-            }
-
-            public function getCacheDriver(): string
-            {
-                return 'array';
-            }
-
-            public function getRedisHost(): ?string
-            {
-                return null;
-            }
-
-            public function getRedisPort(): ?int
-            {
-                return null;
-            }
-
-            public function getRedisPassword(): ?string
-            {
-                return null;
-            }
-
-            public function getSecretKey(): ?string
-            {
-                return null;
-            }
-
-            public function getProxyHost(): ?string
-            {
-                return null;
-            }
-
-            public function getProxyPort(): ?int
-            {
-                return null;
-            }
-
-            public function getVerifySsl(): bool
-            {
-                return true;
-            }
-
-            public function getAllConfig(): array
-            {
-                return [];
-            }
-        };
-
-        $this->loggerService = $this->createMock(LoggerInterface::class);
+        $this->service = self::getService(HttpClientService::class);
     }
 
     public function testDeleteMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
         // 检查方法签名
-        $reflection = new \ReflectionMethod($service, 'delete');
+        $reflection = new \ReflectionMethod($this->service, 'delete');
         $this->assertEquals('delete', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -133,9 +41,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testPatchMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $reflection = new \ReflectionMethod($service, 'patch');
+        $reflection = new \ReflectionMethod($this->service, 'patch');
         $this->assertEquals('patch', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -149,9 +55,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testPostMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $reflection = new \ReflectionMethod($service, 'post');
+        $reflection = new \ReflectionMethod($this->service, 'post');
         $this->assertEquals('post', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -165,9 +69,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testPutMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $reflection = new \ReflectionMethod($service, 'put');
+        $reflection = new \ReflectionMethod($this->service, 'put');
         $this->assertEquals('put', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -181,9 +83,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testRequestMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $reflection = new \ReflectionMethod($service, 'request');
+        $reflection = new \ReflectionMethod($this->service, 'request');
         $this->assertEquals('request', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -198,9 +98,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testRequestAsyncMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $reflection = new \ReflectionMethod($service, 'requestAsync');
+        $reflection = new \ReflectionMethod($this->service, 'requestAsync');
         $this->assertEquals('requestAsync', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -215,9 +113,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testRequestMultipleMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $reflection = new \ReflectionMethod($service, 'requestMultiple');
+        $reflection = new \ReflectionMethod($this->service, 'requestMultiple');
         $this->assertEquals('requestMultiple', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -228,9 +124,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testStreamMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $reflection = new \ReflectionMethod($service, 'stream');
+        $reflection = new \ReflectionMethod($this->service, 'stream');
         $this->assertEquals('stream', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -245,9 +139,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testCheckAvailabilityMethodExists(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $reflection = new \ReflectionMethod($service, 'checkAvailability');
+        $reflection = new \ReflectionMethod($this->service, 'checkAvailability');
         $this->assertEquals('checkAvailability', $reflection->getName());
         $this->assertTrue($reflection->isPublic());
 
@@ -257,34 +149,32 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testMethodReturnTypes(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $deleteReflection = new \ReflectionMethod($service, 'delete');
+        $deleteReflection = new \ReflectionMethod($this->service, 'delete');
         $returnType = $deleteReflection->getReturnType();
         $this->assertInstanceOf(\ReflectionNamedType::class, $returnType);
         $this->assertEquals('array', $returnType->getName());
 
-        $postReflection = new \ReflectionMethod($service, 'post');
+        $postReflection = new \ReflectionMethod($this->service, 'post');
         $returnType = $postReflection->getReturnType();
         $this->assertInstanceOf(\ReflectionNamedType::class, $returnType);
         $this->assertEquals('array', $returnType->getName());
 
-        $putReflection = new \ReflectionMethod($service, 'put');
+        $putReflection = new \ReflectionMethod($this->service, 'put');
         $returnType = $putReflection->getReturnType();
         $this->assertInstanceOf(\ReflectionNamedType::class, $returnType);
         $this->assertEquals('array', $returnType->getName());
 
-        $patchReflection = new \ReflectionMethod($service, 'patch');
+        $patchReflection = new \ReflectionMethod($this->service, 'patch');
         $returnType = $patchReflection->getReturnType();
         $this->assertInstanceOf(\ReflectionNamedType::class, $returnType);
         $this->assertEquals('array', $returnType->getName());
 
-        $requestReflection = new \ReflectionMethod($service, 'request');
+        $requestReflection = new \ReflectionMethod($this->service, 'request');
         $returnType = $requestReflection->getReturnType();
         $this->assertInstanceOf(\ReflectionNamedType::class, $returnType);
         $this->assertEquals('array', $returnType->getName());
 
-        $checkAvailabilityReflection = new \ReflectionMethod($service, 'checkAvailability');
+        $checkAvailabilityReflection = new \ReflectionMethod($this->service, 'checkAvailability');
         $returnType = $checkAvailabilityReflection->getReturnType();
         $this->assertInstanceOf(\ReflectionNamedType::class, $returnType);
         $this->assertEquals('bool', $returnType->getName());
@@ -292,10 +182,8 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testParameterDefaults(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
         // 测试 delete 方法的默认参数
-        $deleteReflection = new \ReflectionMethod($service, 'delete');
+        $deleteReflection = new \ReflectionMethod($this->service, 'delete');
         $parameters = $deleteReflection->getParameters();
         $this->assertTrue($parameters[1]->isDefaultValueAvailable()); // headers 有默认值
         $this->assertEquals([], $parameters[1]->getDefaultValue());
@@ -303,7 +191,7 @@ final class HttpClientServiceMethodTest extends TestCase
         $this->assertNull($parameters[2]->getDefaultValue());
 
         // 测试 post 方法的默认参数
-        $postReflection = new \ReflectionMethod($service, 'post');
+        $postReflection = new \ReflectionMethod($this->service, 'post');
         $parameters = $postReflection->getParameters();
         $this->assertTrue($parameters[1]->isDefaultValueAvailable()); // data 有默认值
         $this->assertEquals([], $parameters[1]->getDefaultValue());
@@ -315,25 +203,19 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testRequestMultipleWithEmptyArray(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $result = $service->requestMultiple([]);
+        $result = $this->service->requestMultiple([]);
 
         $this->assertEmpty($result);
     }
 
     public function testServiceConstruction(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $this->assertInstanceOf(HttpClientService::class, $service);
+        $this->assertInstanceOf(HttpClientService::class, $this->service);
     }
 
     public function testGetClientInfoMethod(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $info = $service->getClientInfo();
+        $info = $this->service->getClientInfo();
         $this->assertArrayHasKey('version', $info);
         $this->assertArrayHasKey('base_uri', $info);
         $this->assertArrayHasKey('timeout', $info);
@@ -342,9 +224,7 @@ final class HttpClientServiceMethodTest extends TestCase
 
     public function testGetStatsMethod(): void
     {
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
-        $stats = $service->getStats();
+        $stats = $this->service->getStats();
         $this->assertArrayHasKey('total_requests', $stats);
         $this->assertArrayHasKey('successful_requests', $stats);
         $this->assertArrayHasKey('failed_requests', $stats);
@@ -356,9 +236,7 @@ final class HttpClientServiceMethodTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
-        $service = new HttpClientService($this->configService, $this->loggerService);
-
         // reset 方法应该不抛出异常
-        $service->reset();
+        $this->service->reset();
     }
 }

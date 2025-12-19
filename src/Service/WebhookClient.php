@@ -2,6 +2,7 @@
 
 namespace Tourze\TencentMeetingBundle\Service;
 
+use Monolog\Attribute\WithMonologChannel;
 use Tourze\TencentMeetingBundle\Exception\ApiException;
 use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
 use Tourze\TencentMeetingBundle\Trait\WebhookCrudOperationsTrait;
@@ -15,7 +16,8 @@ use Tourze\TencentMeetingBundle\Trait\WebhookValidatorTrait;
  *
  * 提供Webhook管理的完整API封装，包括创建、查询、更新、删除等操作
  */
-class WebhookClient extends BaseClient
+#[WithMonologChannel(channel: 'tencent_meeting')]
+final class WebhookClient extends BaseClient
 {
     use WebhookValidatorTrait;
     use WebhookCrudOperationsTrait;

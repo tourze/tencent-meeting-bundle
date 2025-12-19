@@ -2,6 +2,7 @@
 
 namespace Tourze\TencentMeetingBundle\Service;
 
+use Monolog\Attribute\WithMonologChannel;
 use Psr\Log\LoggerInterface;
 use Tourze\TencentMeetingBundle\Exception\ApiException;
 use Tourze\TencentMeetingBundle\Exception\NetworkException;
@@ -11,6 +12,7 @@ use Tourze\TencentMeetingBundle\Exception\NetworkException;
  *
  * 为所有API客户端提供基础功能，包括请求发送、认证、错误处理等
  */
+#[WithMonologChannel(channel: 'tencent_meeting')]
 abstract class BaseClient
 {
     private string $baseUrl;

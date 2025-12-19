@@ -18,7 +18,7 @@ use Tourze\TencentMeetingBundle\Exception\AuthenticationException;
  * 实现JWT认证机制，支持企业自建应用的认证方式
  */
 #[WithMonologChannel(channel: 'tencent_meeting')]
-class JwtAuthService implements AuthServiceInterface
+final class JwtAuthService implements AuthServiceInterface
 {
     private string $secretKey;
 

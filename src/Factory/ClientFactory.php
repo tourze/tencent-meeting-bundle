@@ -23,7 +23,7 @@ use Tourze\TencentMeetingBundle\Trait\ConfigurationValidatorTrait;
  * 提供统一的客户端创建和管理功能，实现单例模式和依赖注入
  */
 #[WithMonologChannel(channel: 'tencent_meeting')]
-class ClientFactory implements ClientFactoryInterface
+final class ClientFactory implements ClientFactoryInterface
 {
     use ConfigurationValidatorTrait;
 

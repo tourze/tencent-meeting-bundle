@@ -17,7 +17,7 @@ use Tourze\TencentMeetingBundle\Entity\User;
  * @extends ServiceEntityRepository<User>
  */
 #[AsRepository(entityClass: User::class)]
-class UserRepository extends ServiceEntityRepository
+final class UserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
